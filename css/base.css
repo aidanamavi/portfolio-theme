@@ -348,7 +348,7 @@ div#page_about {
 }
 #comment {
 	border: 1px solid #ccc;
-	width: 300px;
+	width: 100%;
 }
 .wp-block-image {
   margin: 0 !important;
@@ -357,18 +357,23 @@ div#page_about {
   width: 100% !important;
   height: 100% !important;
 }
+.post-password-form {
+  width: 300px;
+  margin: 0 auto;
+}
 label {
   font-size: 20px;
   text-transform: uppercase;
 }
-input {
+input,
+textarea  {
   border: 1px solid #ccc;
   padding: 10px 10px;
 }
 select,
 input,
-label {
-	width: 300px;
+textarea {
+	min-width: 300px;
 	min-height: 30px;
 	display: block;
 	margin-bottom: 15px;
