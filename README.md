@@ -26,6 +26,13 @@ The theme is clean, content-focused, and designed for clarity. It offers simple,
 * [WordPress](https://www.wordpress.org) >= 4.1
 
 
+## Recommended Plug-ins
+
+* Wordfence Security
+* Stream Logger
+* Rank Math SEO
+
+
 ## Installation
 
 Upload the theme to your WordPress themes directory.
@@ -39,7 +46,7 @@ Activate the theme.
 
 ## Setup
 
-Create your homepage.
+Create your Homepage.
 1. Navigate to `Pages > Add New`
 2. Enter 'Homepage' as the title.
 3. Select the `Page Attributes > Template` named Homepage
@@ -64,12 +71,6 @@ Create your About page.
 3. Perform search engine optimizations for every media, post and page.
 5. Confirm your permalinks look similar to: yourdomain.com/about/
 6. If you experience any issues or have enhancement suggestions, you can report them in the [issue tracker](https://github.com/aidanamavi/portfolio-theme/issues). If it's a challenging issue, the [issue template](https://raw.githubusercontent.com/aidanamavi/portfolio-theme/master/issues-template.md) will help give you a great place to start with your report.
-
-
-## Recommended Plug-ins
-
-* Wordfence Security
-* Rank Math SEO
 
 
 ### Server-side caching
