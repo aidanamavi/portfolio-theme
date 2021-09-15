@@ -1,0 +1,14 @@
+@media only screen and (orientation:portrait) {
+   /* iPhone in Portrait orientation */
+
+}
+
+@media only screen (orientation:landscape) {
+  /* iPhone in Landscape orientation */
+
+}
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
