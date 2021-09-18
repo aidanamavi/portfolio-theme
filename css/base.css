@@ -346,6 +346,28 @@ div.highlight_text div.skills div.skills_column_wide ul:not(:first-child) {
 div#page_about {
 	text-align: left;
 }
+blockquote:before {
+  display: block;
+  float: left;
+  content: "\201C";
+  font-size: 30pt;
+  font-weight: bold;
+  margin-right: 20px;
+  padding: 40px 20px 20px;
+  color: #fff;
+}
+blockquote {
+  border-left: 5px solid #555;
+  margin-left: 0px;
+  padding: 10px 20px;
+  background-color: #171717;
+}
+blockquote cite {
+  position: relative;
+  display: block;
+  margin-left: 80px;
+  color: #999;
+}
 #comment {
 	border: 1px solid #ccc;
 	width: 100%;
