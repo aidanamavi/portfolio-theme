@@ -22,6 +22,7 @@
 					if ( have_posts() ) :
 				    while ( have_posts() ) : the_post();
 				        the_content();
+								wp_link_pages();
 				    endwhile;
 					else :
 					    _e( 'Sorry, no pages matched your criteria.', 'portfolio-theme' );
