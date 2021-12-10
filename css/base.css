@@ -111,6 +111,9 @@ a.post-page-numbers:hover, a.post-page-numbers:active, a.post-page-numbers:focus
   font-weight: bold;
   margin-top: 60px;
 }
+.post-page-numbers {
+  margin: 0px 5px;
+}
 article.blog_list {
 	width: 100%;
 	border-bottom: 1px solid #333;
