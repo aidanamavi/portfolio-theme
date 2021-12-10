@@ -96,7 +96,8 @@ a.glow:hover, a.glow:active, a.glow:focus {
 	-o-transition: 20ms linear 0s;
 	transition: 20ms linear 0s;
 }
-a.underline:hover, a.underline:active, a.underline:focus, a.underline.on {
+a.underline:hover, a.underline:active, a.underline:focus, a.underline.on,
+a.post-page-numbers:hover, a.post-page-numbers:active, a.post-page-numbers:focus, span.post-page-numbers.current {
 	color: #ffffff;
 	text-decoration: none;
 	-webkit-transition: 20ms linear 0s;
@@ -104,6 +105,11 @@ a.underline:hover, a.underline:active, a.underline:focus, a.underline.on {
 	-o-transition: 20ms linear 0s;
 	transition: 20ms linear 0s;
 	border-bottom: 2px solid red !important;
+}
+.post-nav-links {
+  font-size: x-large;
+  font-weight: bold;
+  margin-top: 60px;
 }
 article.blog_list {
 	width: 100%;
