@@ -60,6 +60,7 @@ require_once(get_template_directory().'/php/customize_theme_settings.php');
 require_once(get_template_directory().'/php/customize_seo_keywords.php');
 require_once(get_template_directory().'/php/customize_matomo_tracking.php');
 require_once(get_template_directory().'/php/customize_showcase_settings.php');
+require_once(get_template_directory().'/php/customize_content_security.php');
 
 // Add AJAX support.
 require_once(get_template_directory().'/php/ajax.php');

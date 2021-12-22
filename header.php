@@ -14,7 +14,6 @@
 <html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta http-equiv="Content-Security-Policy" content="default-src <?php bloginfo('wpurl'); ?> 'unsafe-eval' 'unsafe-inline'; object-src 'none'">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php if(!in_array('seo-by-rank-math/rank-math.php', apply_filters('active_plugins', get_option('active_plugins')))): ?>
 		<?php custom_meta_description(); ?>
