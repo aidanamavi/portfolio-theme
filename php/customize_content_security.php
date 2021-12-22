@@ -16,6 +16,7 @@ function customize_content_security( $wp_customize ) {
         'title' => 'Content Security Settings',
         'priority' => 35,
 				'panel' => 'theme_panel',
+        'description' => __( 'Improve your web site security with content policies.', 'portfoliotheme' ),
       )
   );
 	$wp_customize->add_setting(
@@ -31,7 +32,7 @@ function customize_content_security( $wp_customize ) {
       'label' => 'Default Source',
       'section' => 'content_security_section',
       'type' => 'text',
-      'description' => 'The web site address that this web site uses.',
+      'description' => __( 'The web site address that this web site uses.', 'portfoliotheme' ),
     )
 	);
   $wp_customize->add_setting(
@@ -47,7 +48,7 @@ function customize_content_security( $wp_customize ) {
       'label' => 'Frame Source',
       'section' => 'content_security_section',
       'type' => 'text',
-      'description' => 'Trusted web site addresses you use for iframe elements.',
+      'description' => __( 'Trusted web site addresses you use for iframe elements.', 'portfoliotheme' ),
     )
 	);
   $wp_customize->add_setting(
@@ -63,7 +64,7 @@ function customize_content_security( $wp_customize ) {
       'label' => 'Media Source',
       'section' => 'content_security_section',
       'type' => 'text',
-      'description' => 'Trusted web site addresses you use for audio, video, and track elements.',
+      'description' => __('Trusted web site addresses you use for audio, video, and track elements.', 'portfoliotheme' ),
     )
 	);
   $wp_customize->add_setting(
@@ -79,7 +80,7 @@ function customize_content_security( $wp_customize ) {
       'label' => 'Object Source',
       'section' => 'content_security_section',
       'type' => 'text',
-      'description' => 'Trusted web site addresses you use for object, embed, and applet elements.',
+      'description' => __('Trusted web site addresses you use for object, embed, and applet elements.', 'portfoliotheme' ),
     )
 	);
   $wp_customize->add_setting(
@@ -95,7 +96,7 @@ function customize_content_security( $wp_customize ) {
       'label' => 'Unsafe Eval',
       'section' => 'content_security_section',
       'type' => 'checkbox',
-      'description' => 'Allow use of JavaScript such as eval, setImmediate , and window.execScript.',
+      'description' => __('Allow use of JavaScript such as eval, setImmediate , and window.execScript.', 'portfoliotheme' ),
     )
 	);
   $wp_customize->add_setting(
@@ -111,7 +112,7 @@ function customize_content_security( $wp_customize ) {
       'label' => 'Unsafe Inline',
       'section' => 'content_security_section',
       'type' => 'checkbox',
-      'description' => 'Allow use of HTML inline sources.',
+      'description' => __('Allow use of HTML inline sources.', 'portfoliotheme' ),
     )
 	);
 }

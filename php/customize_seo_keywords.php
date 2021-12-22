@@ -12,7 +12,7 @@ function customize_seo_keywords( $wp_customize ) {
   $wp_customize->add_section(
       'seo_section',
       array(
-        'title' => 'SEO Keywords',
+        'title' => __('SEO Keywords', 'portfoliotheme' ),
         'priority' => 35,
 				'panel' => 'theme_panel',
       )
@@ -27,7 +27,7 @@ function customize_seo_keywords( $wp_customize ) {
 	$wp_customize->add_control(
     'seo_keywords_textbox',
     array(
-      'label' => 'Keywords',
+      'label' => __('Keywords', 'portfoliotheme' ),
       'section' => 'seo_section',
       'type' => 'text',
     )
