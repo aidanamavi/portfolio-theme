@@ -6,11 +6,12 @@ The theme is clean, content-focused, and designed for clarity. It offers simple,
 
 
 
-## Top 10 Benefits
+## Benefits
 
 * :rocket: **Integration with world-class open-source software.** Tested with and built on Linux, Apache, MySQL, PHP, WordPress, jQuery, Matomo, and Wordfence.
 * :zap: **Incredibly fast with built-in caching.** Front-end client-side caching with AJAX built-in.
 * :lock: **Works seamlessly with encrypted content.** Works automagically with your SSL certificates.
+* :lock_with_ink_pen: **Content Security Policy settings.** Easily add and manage policies to protect your web site.
 * :+1: **Standards compliant & validated code.** HTML5, CSS3, and JavaScript code analysis and verification.
 * :iphone: **Responsive design.** Support for desktops, laptops, tablets, and smartphone screens.
 * :bar_chart: **Matomo Analytics integration.** No code necessary. Works with any host.
@@ -18,7 +19,6 @@ The theme is clean, content-focused, and designed for clarity. It offers simple,
 * :page_facing_up: **Printer friendly.** Your content is scaled to bring your colorful imagery to focus.
 * :wheelchair: **Accessible friendly.** W3C Web Accessibility Initiative (WAI) support across all devices.
 * :computer: **Flows like a modern web app.** Smart and smooth loading screens and transitions.
-
 
 ## Requirements
 
