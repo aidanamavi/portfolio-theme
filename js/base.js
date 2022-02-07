@@ -181,9 +181,12 @@ jQuery(document).ready( function() {
 			var windowHeight = $(window).height();
 			var numbersWrapperHeight = 70; // 34.6px
 			var slideHeightImg = jQuery('.slide:visible img.highlight').height(); // 529px
+				if (!parseInt(slideHeightImg)) { slideHeightImg = 0; }
 			var slideHeightText = jQuery('.slide:visible .highlight_text').height(); // 529px
 			var slideHeight = jQuery('.slide:visible').height();
 			var slideHeight2 = slideHeightImg + slideHeightText;
+			// console.log('visiblePage: '+visiblePage);
+			// console.log('postType: '+postType);
 			// console.log('windowHeight: '+windowHeight);
 			// console.log('numbersWrapperHeight: '+numbersWrapperHeight);
 			// console.log('slideHeightImg: '+slideHeightImg);
