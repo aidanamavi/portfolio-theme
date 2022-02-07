@@ -13,7 +13,6 @@
 				<div id="page_archive_about" data-page-title="Resume" data-view-type="single" data-post-type="about">
 					<div class="highlight_slides">
 						<div class="slide" data-slide="1">
-							<img src="/wp-content/uploads/2020/05/highlight_about_1.jpg" class="highlight" alt="">
 							<div class="highlight_text">
 								<div class="title_wrapper">
 									<div class="title">
@@ -30,6 +29,9 @@
 								</p>
 								<p>
 									Some of Aidan's past clients include the United Nations, Samsung, Best Buy, Microsoft, Wal-Mart, 20th Century Fox,  Maverick Records, Vice Records, Atlantic Records, Kinetic Records, Tribeca Film Festival, Huffington Post, Urban Ink, Papa Johns, Kona Grill,  Groove FM; Crispin Glover, Elizabeth McGovern, Pallavi Sharda, Denis Leary, Andy Dick, Michael Jai White, Leonard Robinson, Ohad Knoller, Alex Karpovsky, Charles Matthau; Kal Rieman, Dance Couture, Trump Model Management, Astarte Cosmetics; Paul Oakenfold, Crystal Method, The Streets, Soul Hooligan, French Montana, Chinx, Bow Wow.
+								</p>
+								<p>
+									Credits aside, he is set apart and above typical producers due to his experience fulfilling top to bottom roles, which has given him the ability to provide comprehensive insights and solutions for all stakeholders alike; and his multidisciplinary knowledge, which has given him the flexibility to effectively contribute to projects for a wide variety of industries.
 								</p>
 								<p>
 									To view Aidan's endorsements, testimonials, and references from those he has worked with, please connect with him on <a href="https://www.linkedin.com/in/aidanamavi" class="glow" target=”_blank” onclick="javascript:_paq.push(['trackPageView', 'navigation/about/outlink/linkedin']);">LinkedIn</a>.
