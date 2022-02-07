@@ -26,7 +26,7 @@
 								<h4 class="blog_date_categories_tags"></h4>
 								<div class="blog_content">
 									<p>
-										Sorry, we were unable to supply the page you were looking for. Please check that you have entered the correct URL in your web browser's address bar, and refresh the page to verify your access.
+										Sorry, we were unable to supply the page you were looking for. Please check that you have entered the correct URL in your web browser's address bar, and <a href="javascript:location.reload();">refresh</a> the page to verify your access.
 									</p>
 								</div>
 							</article>
