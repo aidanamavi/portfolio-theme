@@ -14,6 +14,23 @@
 					<div class="title_wrapper">
 						<div class="title">
 							<h2>
+								categories
+							</h2>
+						</div>
+					</div>
+					<ul>
+    		<?php
+				wp_list_categories( array(
+	        'orderby'    => 'name',
+	        'show_count' => true,
+	        // 'exclude'    => array( 10 ),
+					'title_li' => ''
+    		));
+				?>
+					</ul>
+					<div class="title_wrapper">
+						<div class="title">
+							<h2>
 								archive
 							</h2>
 						</div>
