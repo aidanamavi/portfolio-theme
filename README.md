@@ -26,13 +26,6 @@ The theme is clean, content-focused, and designed for clarity. It offers simple,
 * [WordPress](https://www.wordpress.org) >= 4.1
 
 
-## Recommended Plug-ins
-
-* Wordfence Security
-* Stream Logger
-* Rank Math SEO
-
-
 ## Installation
 
 Upload the theme to your WordPress themes directory.
@@ -67,18 +60,14 @@ Create your About page.
 ### Tips
 
 1. Use 16:9 images for the best results.
-2. Use WordPress for media. Do not use hosting services like YouTube.
+2. Upload your media directly to WordPress.
 3. Perform search engine optimizations for every media, post and page.
 5. Confirm your permalinks look similar to: yourdomain.com/about/
-6. If you experience any issues or have enhancement suggestions, you can report them in the [issue tracker](https://github.com/aidanamavi/portfolio-theme/issues). If it's a challenging issue, the [issue template](https://raw.githubusercontent.com/aidanamavi/portfolio-theme/master/issues-template.md) will help give you a great place to start with your report.
-
-
-### Server-side caching
-Front-end caching is done automagically. Back-end caching will be provided in a future release.
+6. If you experience any issues or have enhancement suggestions, you can report them in the [issue tracker](https://github.com/aidanamavi/portfolio-theme/issues). 
 
 
 ## Maintainers
 
 Active: [Aidan Amavi](https://github.com/AidanAmavi)
 
-If you’d like to help, just go through the [issue list](https://github.com/aidanamavi/portfolio-resume/issues) and fix some. :)
+
