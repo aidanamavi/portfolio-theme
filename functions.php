@@ -40,6 +40,9 @@ require_once(get_template_directory().'/php/custom_remove_url_protocol.php');
 // Add custom remove protected filter.
 require_once(get_template_directory().'/php/custom_remove_protected_filter.php');
 
+// Add custom remove shortlink filter.
+require_once(get_template_directory().'/php/custom_remove_shortlink.php');
+
 // Add thumbnail support for Work post type.
 require_once(get_template_directory().'/php/custom_thumbnail_support.php');
 
