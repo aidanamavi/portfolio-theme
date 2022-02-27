@@ -13,7 +13,6 @@
 				<div id="page_info_copyright" data-page-title="copyrights">
 					<div class="highlight_slides">
 						<div class="slide" data-slide="1">
-							<img src="https://aidanamavi.com/wp-content/uploads/2020/05/highlight_about_1.jpg" class="highlight" alt="">
 							<div class="highlight_text">
 								<div class="title_wrapper">
 									<div class="title">
