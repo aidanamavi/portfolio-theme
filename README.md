@@ -57,9 +57,9 @@ Create your About page.
 4. Click Publish to save the page.
 
 
-### Tips
+### For the best results
 
-1. Use 16:9 images for the best results.
+1. Use images with 16:9 aspect ratio.
 2. Upload your media directly to WordPress.
 3. Perform search engine optimizations for every media, post and page.
 5. Confirm your permalinks look similar to: yourdomain.com/about/
