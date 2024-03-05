@@ -455,7 +455,7 @@ function isSeparateGroup($metaGroup, $previousEntry, $nextEntry) {
 	} elseif ($metaGroup === 'products') {
 		$allGroups = $productGroups;
 	} elseif ($metaGroup === 'presentations') {
-		$allGroups = $productGroups;
+		$allGroups = $presentationGroups;
 	} else {
 		error_log('Incorrect metaGroup: '.$metaGroup);
 	}
