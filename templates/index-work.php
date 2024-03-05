@@ -39,6 +39,7 @@
 					$myposts = get_posts( $args );
 					foreach($myposts as $post) : setup_postdata($post);
 						$keywords = get_post_meta( get_the_ID(), 'shortcut_keywords', true );
+						$keywordList = '';
 						if ($keywords) :
 							foreach ($keywords as $keyword) :
 								if (!empty($keywordList)) : $keywordList.= ' '; endif;
