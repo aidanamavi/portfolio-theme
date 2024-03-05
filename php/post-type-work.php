@@ -527,37 +527,23 @@ function project_info_meta_boxes() {
     'high'
   );
 }
-/* Adds the upload functions for the images. */
-add_action('admin_enqueue_scripts', 'image_upload_scripts');
-function image_upload_scripts() {
-	global $post_type;
-	$post_type = $post_type ? $post_type : $_GET['post_type'];
-	$action = $_GET['action'];
-	if ($post_type === 'work') {
-    wp_register_script('upload-slide-image', get_bloginfo('template_url').'/js/upload-slide-image.js', array('jquery'));
-    wp_enqueue_script('upload-slide-image');
-  }
-}
-/* Adds the upload functions for the images. */
-add_action('admin_enqueue_scripts', 'form_copy_scripts');
-function form_copy_scripts() {
-	global $post_type;
-	$post_type = $post_type ? $post_type : $_GET['post_type'];
-	$action = $_GET['action'];
-	if ($post_type === 'work') {
-    wp_register_script('copy-slide-info', get_bloginfo('template_url').'/js/copy-slide-info.js', array('jquery'));
-    wp_enqueue_script('copy-slide-info');
-  }
-}
-/* Adds the styles for the forms. */
-add_action('admin_enqueue_scripts', 'work_post_type_styles');
-function work_post_type_styles() {
-	global $post_type;
-	$post_type = $post_type ? $post_type : $_GET['post_type'];
-	$action = $_GET['action'];
-	if ($post_type === 'work') {
+/* Adds work post type scripts and styles */
+add_action('admin_enqueue_scripts', 'work_post_type_styles_and_scripts');
+function work_post_type_styles_and_scripts() {
+	$current_screen = get_current_screen();
+	if ($current_screen->id == 'work') {
+		/* Adds the styles for the forms. */
     wp_register_style('work_post_type_styles', get_bloginfo('template_url').'/css/post-type-work.css');
     wp_enqueue_style('work_post_type_styles');
+
+		/* Adds the form copy function for the slide info. */
+    wp_register_script('copy-slide-info', get_bloginfo('template_url').'/js/copy-slide-info.js', array('jquery'));
+    wp_enqueue_script('copy-slide-info');
+
+		/* Adds the upload function for the slide image. */
+    wp_register_script('upload-slide-image', get_bloginfo('template_url').'/js/upload-slide-image.js', array('jquery'));
+    wp_enqueue_script('upload-slide-image');
+
   }
 }
 /* Prints the box content */
