@@ -4,7 +4,7 @@
 * @version 0.5
 * @author Aidan Amavi <mail@aidanamavi.com>
 * @link https://www.aidanamavi.com Author's Web Site
-* @copyright 2012 - 2021, Aidan Amavi
+* @copyright 2012 - 2024, Aidan Amavi
 * @license https://www.gnu.org/licenses/agpl.html GNU Affero General Public License
 */
 
@@ -16,7 +16,7 @@ die ('Please do not load this page directly.');
 add_filter('show_admin_bar', '__return_false');
 
 // Remove the_generator meta tag.
-add_filter( 'the_generator', create_function('$a', "return null;") );
+// add_filter( 'the_generator', create_function('$a', "return null;") );
 add_filter('the_generator', '__return_false');
 
 // Add shortcodes.
