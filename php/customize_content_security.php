@@ -8,142 +8,109 @@
 * @license https://www.gnu.org/licenses/agpl.html GNU Affero General Public License
 */
 
+
+## Reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-src
+## Reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+## Reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+$content_security_settings = array(
+  array(
+    'name' => 'default_src_textbox',
+    'label' => 'Default Source',
+    'key' => 'default-src',
+    'description' => __( 'The web site address that this web site uses.', 'portfoliotheme' ),
+  ),
+  array(
+    'name' => 'frame_src_textbox',
+    'label' => 'Frame Source',
+    'key' => 'frame-src',
+    'description' => __( 'Trusted web site addresses you use for iframe elements.', 'portfoliotheme' ),
+  ),
+  array(
+    'name' => 'font_src_textbox',
+    'label' => 'Font Source',
+    'key' => 'font-src',
+    'description' => __('Trusted web site addresses you use for fonts loaded using @font-face.', 'portfoliotheme' ),
+  ),
+  array(
+    'name' => 'img_src_textbox',
+    'label' => 'Image Source',
+    'key' => 'image-src',
+    'description' => __('Trusted web site addresses you use for images and favicons.', 'portfoliotheme' ),
+  ),
+  array(
+    'name' => 'media_src_textbox',
+    'label' => 'Media Source',
+    'key' => 'media-src',
+    'description' => __('Trusted web site addresses you use for audio, video, and track elements.', 'portfoliotheme' ),
+  ),
+  array(
+    'name' => 'object_src_textbox',
+    'label' => 'Object Source',
+    'key' => 'object-src',
+    'description' => __('Trusted web site addresses you use for object, embed, and applet elements.', 'portfoliotheme' ),
+  ),
+  // array(
+  //   'name' => 'unsafe_eval_select',
+  //   'label' => 'Unsafe Eval',
+  //   'type' => 'checkbox',
+  //   'description' => __('Allow use of JavaScript such as eval, setImmediate, and window.execScript.', 'portfoliotheme' ),
+  // ),
+  // array(
+  //   'name' => 'unsafe_inline_select',
+  //   'label' => 'Unsafe Inline',
+  //   'type' => 'checkbox',
+  //   'description' => __('Allow use of HTML inline sources.', 'portfoliotheme' ),
+  // ),
+);
 function customize_content_security( $wp_customize ) {
-  $siteURL = site_url();
+  global $content_security_settings;
+  $settings = $content_security_settings;
+  $section['name'] = 'content_security_section';
   $wp_customize->add_section(
-      'content_security_section',
+      $section['name'],
       array(
         'title' => 'Content Security Settings',
         'priority' => 35,
-				'panel' => 'theme_panel',
+        'panel' => 'theme_panel',
         'description' => __( 'Improve your web site security with content policies.', 'portfoliotheme' ),
       )
   );
-	$wp_customize->add_setting(
-    'default_src_textbox',
-    array(
-      'default' => site_url(),
-			'transport'   => 'postMessage',
-    )
-	);
-	$wp_customize->add_control(
-    'default_src_textbox',
-    array(
-      'label' => 'Default Source',
-      'section' => 'content_security_section',
-      'type' => 'text',
-      'description' => __( 'The web site address that this web site uses.', 'portfoliotheme' ),
-    )
-	);
-  $wp_customize->add_setting(
-    'frame_src_textbox',
-    array(
-      'default' => '',
-			'transport'   => 'postMessage',
-    )
-	);
-	$wp_customize->add_control(
-    'frame_src_textbox',
-    array(
-      'label' => 'Frame Source',
-      'section' => 'content_security_section',
-      'type' => 'text',
-      'description' => __( 'Trusted web site addresses you use for iframe elements.', 'portfoliotheme' ),
-    )
-	);
-  $wp_customize->add_setting(
-    'media_src_textbox',
-    array(
-      'default' => '',
-			'transport'   => 'postMessage',
-    )
-	);
-	$wp_customize->add_control(
-    'media_src_textbox',
-    array(
-      'label' => 'Media Source',
-      'section' => 'content_security_section',
-      'type' => 'text',
-      'description' => __('Trusted web site addresses you use for audio, video, and track elements.', 'portfoliotheme' ),
-    )
-	);
-  $wp_customize->add_setting(
-    'object_src_textbox',
-    array(
-      'default' => '\'none\'',
-			'transport'   => 'postMessage',
-    )
-	);
-	$wp_customize->add_control(
-    'object_src_textbox',
-    array(
-      'label' => 'Object Source',
-      'section' => 'content_security_section',
-      'type' => 'text',
-      'description' => __('Trusted web site addresses you use for object, embed, and applet elements.', 'portfoliotheme' ),
-    )
-	);
-  $wp_customize->add_setting(
-    'unsafe_eval_select',
-    array(
-      'default' => '',
-			'transport'   => 'postMessage',
-    )
-	);
-	$wp_customize->add_control(
-    'unsafe_eval_select',
-    array(
-      'label' => 'Unsafe Eval',
-      'section' => 'content_security_section',
-      'type' => 'checkbox',
-      'description' => __('Allow use of JavaScript such as eval, setImmediate , and window.execScript.', 'portfoliotheme' ),
-    )
-	);
-  $wp_customize->add_setting(
-    'unsafe_inline_select',
-    array(
-      'default' => '',
-			'transport'   => 'postMessage',
-    )
-	);
-	$wp_customize->add_control(
-    'unsafe_inline_select',
-    array(
-      'label' => 'Unsafe Inline',
-      'section' => 'content_security_section',
-      'type' => 'checkbox',
-      'description' => __('Allow use of HTML inline sources.', 'portfoliotheme' ),
-    )
-	);
+  foreach ($settings as $setting) {
+    $wp_customize->add_setting(
+      $setting['name'],
+      array(
+        'default' => '',
+        'transport' => 'postMessage',
+      )
+    );
+    $wp_customize->add_control(
+      $setting['name'],
+      array(
+        'label' => $setting['label'],
+        'section' => $section['name'],
+        'type' => isset($setting['type']) ? $setting['type'] : 'text',
+        'description' => $setting['description'],
+      )
+    );
+  }
 }
 add_action( 'customize_register', 'customize_content_security' );
 
 function content_security_header( ) {
-  $default_src_textbox = get_theme_mod('default_src_textbox');
-  $frame_src_textbox = get_theme_mod('frame_src_textbox');
-  $media_src_textbox = get_theme_mod('media_src_textbox');
-  $object_src_textbox = get_theme_mod('object_src_textbox');
-  $unsafe_eval_select = get_theme_mod('unsafe_eval_select');
-  $unsafe_inline_select = get_theme_mod('unsafe_inline_select');
-  if ($frame_src_textbox) { $frame_src_textbox = "; frame-src ".$frame_src_textbox; } else {
-    $frame_src_textbox = '';
+  global $content_security_settings;
+  $settings = $content_security_settings;
+  $header = '<meta http-equiv="Content-Security-Policy" content="';
+  $header_content = '';
+  foreach ($settings as $setting) {
+    $setting['value'] = get_theme_mod($setting['name']);
+    if ($setting['value']) {
+      if (!empty($header_content)) $header_content .= ' ';
+      $header_content .= $setting['key'] . ' ' . $setting['value'] . ';';
+    }
   }
-  if ($media_src_textbox) { $media_src_textbox = "; media-src ".$media_src_textbox; } else {
-    $media_src_textbox = '';
-  }
-  if ($object_src_textbox) { $object_src_textbox = "; object-src ".$object_src_textbox; } else {
-    $object_src_textbox = '';
-  }
-  if ($unsafe_eval_select) { $unsafe_eval_select = " 'unsafe-eval'"; } else {
-    $unsafe_eval_select = '';
-  }
-  if ($unsafe_inline_select) { $unsafe_inline_select = " 'unsafe-inline'"; } else {
-    $unsafe_inline_select = '';
-  }
-  ?>
-  <meta http-equiv="Content-Security-Policy" content="default-src <?php echo $default_src_textbox; echo $unsafe_eval_select; echo $unsafe_inline_select; echo $frame_src_textbox; echo $media_src_textbox; echo $object_src_textbox; ?>">
-  <?php
+  $header .= $header_content . '">';
+  echo $header.PHP_EOL;
 }
 add_action( 'wp_head', 'content_security_header' );
 
- ?>
+?>
