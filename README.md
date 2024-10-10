@@ -66,6 +66,11 @@ Create your About page.
 6. If you experience any issues or have enhancement suggestions, you can report them in the [issue tracker](https://github.com/aidanamavi/portfolio-theme/issues). 
 
 
+## Known Issues
+1. UX for Content-Security-Policy needs improvement.
+2. JavaScript onLoad needs fixed.
+
+
 ## Maintainers
 
 Active: [Aidan Amavi](https://github.com/AidanAmavi)
