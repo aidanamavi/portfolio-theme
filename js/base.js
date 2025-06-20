@@ -66,7 +66,14 @@ jQuery(document).ready( function() {
       dfds.push(dfd);
       var img = new Image();
       img.onload = function(){dfd.resolve();}
-      img.onerror = function(){dfd.resolve();}
+      img.onerror = function(){dfd.resolve();} // Resolve even on error to prevent hanging
+      // Set a timeout for each image to prevent hanging
+      setTimeout(function() {
+        if (dfd.state() === 'pending') {
+          // console.log('Image loading timeout for:', img.src);
+          dfd.resolve();
+        }
+      }, 8000); // 8 second timeout per image
       img.src = this.src;
     });
     // Return a master promise object, which resolves when all deferred objects have resolved
@@ -95,6 +102,11 @@ jQuery(document).ready( function() {
 	}
 	function hideLoadingAnimation() {
 		// console.log('hideLoadingAnimation()');
+		// Ensure we don't hide an already hidden animation to prevent issues
+		if (!isPageLoading && jQuery('#loading_animation').css('opacity') == '0') {
+			// console.log('Loading animation already hidden, skipping...');
+			return;
+		}
 		jQuery('#loading_animation').stop().animate({'opacity': '0'},500, function(){
 			isPageLoading = false;
 			updateVisiblePage();
@@ -208,11 +220,25 @@ jQuery(document).ready( function() {
 			jQuery('#'+visiblePage).hide( function() {
 				if (pageContent) {
 					jQuery('#content_wrapper').css('opacity', '0');
-					jQuery('#content_wrapper').append(pageContent).imagesLoaded().then(function(){
-						// console.log('------ IMAGES LOADED ------');
+					// Set up a fallback timeout for dynamic content loading
+					var displayPageTimeoutId = setTimeout(function() {
+						// console.log('Display page timeout triggered - forcing loading animation to hide');
 						jQuery('#content_wrapper').animate({'opacity':'1'},1000);
 						hideLoadingAnimation();
-        	});
+					}, 8000); // 8 second fallback timeout for dynamic content
+					
+					jQuery('#content_wrapper').append(pageContent).imagesLoaded().then(function(){
+						// console.log('------ IMAGES LOADED ------');
+						clearTimeout(displayPageTimeoutId);
+						jQuery('#content_wrapper').animate({'opacity':'1'},1000);
+						hideLoadingAnimation();
+        	}).catch(function(error) {
+						// Handle any errors in the image loading process for dynamic content
+						// console.log('Error during dynamic content image loading:', error);
+						clearTimeout(displayPageTimeoutId);
+						jQuery('#content_wrapper').animate({'opacity':'1'},1000);
+						hideLoadingAnimation();
+					});
 					addHighlightSlideCursor();
 				} else {
 					// scenario: restart browser with forward history, no div/content
@@ -315,11 +341,24 @@ jQuery(document).ready( function() {
 
 	// First page load.
 	window.onload = function() {
+		// Set up a fallback timeout to ensure loading animation is always hidden
+		var loadingTimeoutId = setTimeout(function() {
+			// console.log('Loading timeout triggered - forcing loading animation to hide');
+			hideLoadingAnimation();
+		}, 10000); // 10 second fallback timeout
+
 		jQuery('html').animate({'opacity':'1'},1, function(){
 			jQuery('#content_wrapper').imagesLoaded().then(function(){
 				// After images are loaded
 				// console.log('------ IMAGES LOADED ------');
 				// TODO: add a show event and add a display none to content wrapper; fixes ovefflow issues when loading animation...
+				clearTimeout(loadingTimeoutId); // Clear the fallback timeout since images loaded successfully
+				jQuery('#content_wrapper').animate({'opacity':'1'},750);
+				hideLoadingAnimation();
+			}).catch(function(error) {
+				// Handle any errors in the image loading process
+				// console.log('Error during image loading:', error);
+				clearTimeout(loadingTimeoutId);
 				jQuery('#content_wrapper').animate({'opacity':'1'},750);
 				hideLoadingAnimation();
 			});
