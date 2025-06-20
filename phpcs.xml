@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<ruleset name="Portfolio Theme WordPress Coding Standards">
+    <description>WordPress Coding Standards for Portfolio Theme</description>
+
+    <!-- Check all PHP files in the theme -->
+    <file>.</file>
+
+    <!-- Exclude vendor directory -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+
+    <!-- Include the WordPress-Extra standard -->
+    <rule ref="WordPress">
+        <!-- Allow short array syntax -->
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+        
+        <!-- Allow PHP 7+ features -->
+        <exclude name="PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.NeedsInspection"/>
+        
+        <!-- Relaxed file naming rules for theme files -->
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+        <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+    </rule>
+
+    <!-- Check for PHP cross-version compatibility -->
+    <config name="minimum_supported_wp_version" value="4.1"/>
+    
+    <!-- Set the minimum PHP version -->
+    <config name="testVersion" value="7.0-"/>
+</ruleset>

@@ -1,0 +1,33 @@
+{
+    "name": "aidanamavi/portfolio-theme",
+    "description": "A minimalist WordPress theme for your portfolio",
+    "type": "project",
+    "license": "AGPL-3.0",
+    "authors": [
+        {
+            "name": "Aidan Amavi",
+            "email": "mail@aidanamavi.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.8",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^9.6",
+        "wp-coding-standards/wpcs": "^3.0"
+    },
+    "scripts": {
+        "lint": "phpcs --standard=WordPress *.php php/*.php",
+        "lint:fix": "phpcbf --standard=WordPress *.php php/*.php",
+        "analyze": "phpstan analyse *.php php/*.php --level=5",
+        "test": "phpunit",
+        "validate": "composer run lint && composer run analyze"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

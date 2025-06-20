@@ -1,0 +1,25 @@
+parameters:
+    paths:
+        - .
+    excludePaths:
+        - vendor
+        - node_modules
+    level: 5
+    ignoreErrors:
+        # WordPress specific functions that PHPStan doesn't know about
+        - '#Function wp_[a-zA-Z_]+ not found#'
+        - '#Function get_[a-zA-Z_]+ not found#'
+        - '#Function add_[a-zA-Z_]+ not found#'
+        - '#Function apply_filters not found#'
+        - '#Function bloginfo not found#'
+        - '#Function get_template_directory not found#'
+        - '#Function get_bloginfo not found#'
+        - '#Function get_theme_mod not found#'
+        - '#Function wp_create_nonce not found#'
+        - '#Function wp_head not found#'
+        - '#Function get_stylesheet_directory_uri not found#'
+        - '#Function in_array not found#'
+        - '#Function rand not found#'
+        - '#Function preg_match not found#'
+        - '#Variable \$_SERVER might not be defined#'
+        - '#Variable \$current_user might not be defined#'

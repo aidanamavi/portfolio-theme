@@ -8,21 +8,21 @@ The theme is clean, content-focused, and designed for clarity. It offers simple,
 
 ## Benefits
 
-* :rocket: **Integration with world-class open-source software.** Tested with and built on Linux, Apache, MySQL, PHP, WordPress, jQuery, Matomo, and Wordfence.
-* :zap: **Incredibly fast with built-in caching.** Front-end client-side caching with AJAX built-in.
-* :lock: **Works seamlessly with encrypted content.** Works automagically with your SSL certificates.
-* :lock_with_ink_pen: **Content Security Policy settings.** Easily add and manage policies to protect your web site.
-* :+1: **Standards compliant & validated code.** HTML5, CSS3, and JavaScript code analysis and verification.
+* :rocket: **Built with modern open-source technologies.** Built for WordPress, PHP, and jQuery with Matomo analytics integration.
+* :zap: **Fast page transitions with AJAX.** Front-end AJAX-powered page loading for smooth navigation.
+* :lock: **HTTPS ready.** Compatible with SSL certificates for secure connections.
+* :lock_with_ink_pen: **Content Security Policy settings.** Easily add and manage policies to protect your web site (UX improvements in progress).
+* :+1: **Standards compliant & validated code.** HTML5, CSS3, and JavaScript code analysis and verification with automated testing.
 * :iphone: **Responsive design.** Support for desktops, laptops, tablets, and smartphone screens.
 * :bar_chart: **Matomo Analytics integration.** No code necessary. Works with any host.
-* :mag: **Search Engine Optimized.** Organizes your content behind-the-scenes for optimal indexing.
+* :mag: **SEO features included.** Custom meta descriptions, keywords, and page titles for search optimization.
 * :page_facing_up: **Printer friendly.** Your content is scaled to bring your colorful imagery to focus.
-* :wheelchair: **Accessible friendly.** W3C Web Accessibility Initiative (WAI) support across all devices.
+* :wheelchair: **Basic accessibility features.** Alt text for images and semantic HTML structure.
 * :computer: **Flows like a modern web app.** Smart and smooth loading screens and transitions.
 
 ## Requirements
 
-* [PHP](https://www.php.net/) >= 7
+* [PHP](https://www.php.net/) >= 7.0
 * [WordPress](https://www.wordpress.org) >= 4.1
 
 
@@ -62,9 +62,44 @@ Create your About page.
 1. Use images with 16:9 aspect ratio.
 2. Upload your media directly to WordPress.
 3. Perform search engine optimizations for every media, post and page.
-5. Confirm your permalinks look similar to: yourdomain.com/about/
-6. If you experience any issues or have enhancement suggestions, you can report them in the [issue tracker](https://github.com/aidanamavi/portfolio-theme/issues). 
+4. Confirm your permalinks look similar to: yourdomain.com/about/
+5. If you experience any issues or have enhancement suggestions, you can report them in the [issue tracker](https://github.com/aidanamavi/portfolio-theme/issues).
 
+
+## Development & Validation
+
+The theme includes comprehensive code validation and testing tools to ensure quality and standards compliance:
+
+### Code Validation
+* **JavaScript**: ESLint for code quality and standards compliance
+* **CSS**: Stylelint for stylesheet validation and best practices
+* **PHP**: Built-in syntax validation for all PHP files
+
+### Testing
+* **Unit Tests**: PHPUnit for PHP functionality testing
+* **JavaScript Tests**: Jest for frontend component testing
+* **Integration Tests**: Comprehensive theme functionality validation
+
+### Available Commands
+```bash
+# Install development dependencies
+npm install
+
+# Run all validations
+npm run validate
+
+# Run all tests
+npm run test:all
+
+# Individual validations
+npm run lint:js        # JavaScript linting
+npm run lint:css       # CSS linting
+npm run validate:php   # PHP syntax validation
+
+# Individual tests
+npm test              # JavaScript tests
+phpunit              # PHP tests
+```
 
 ## Known Issues
 1. UX for Content-Security-Policy needs improvement.
