@@ -1,0 +1,38 @@
+{
+  "extends": ["standard"],
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
+  "globals": {
+    "jQuery": "readonly",
+    "$": "readonly",
+    "_paq": "writable",
+    "userId": "writable",
+    "nonce": "writable",
+    "siteTitle": "writable",
+    "showcaseAnimationIn": "writable",
+    "showcaseAnimationOut": "writable",
+    "categoryName": "writable",
+    "categoryId": "writable",
+    "wp": "readonly"
+  },
+  "rules": {
+    "no-unused-vars": ["warn", { "vars": "all", "args": "none" }],
+    "space-before-function-paren": ["error", "never"],
+    "no-extend-native": "off",
+    "no-tabs": "off",
+    "no-mixed-spaces-and-tabs": "off",
+    "camelcase": "off",
+    "no-use-before-define": "off",
+    "no-undef": "off",
+    "no-redeclare": "off",
+    "no-unused-expressions": "off",
+    "no-sequences": "off",
+    "no-void": "off",
+    "no-return-assign": "off",
+    "no-var": "off",
+    "prefer-const": "off",
+    "no-array-constructor": "off"
+  }
+}

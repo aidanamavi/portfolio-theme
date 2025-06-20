@@ -1,0 +1,40 @@
+{
+  "name": "portfolio-theme",
+  "version": "0.5.0",
+  "description": "A minimalist WordPress theme for your portfolio",
+  "keywords": [
+    "wordpress",
+    "theme",
+    "portfolio",
+    "responsive"
+  ],
+  "author": "Aidan Amavi <mail@aidanamavi.com>",
+  "license": "AGPL-3.0",
+  "homepage": "https://github.com/aidanamavi/portfolio-theme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aidanamavi/portfolio-theme.git"
+  },
+  "scripts": {
+    "lint:js": "eslint js/*.js --ignore-pattern '*.min.js' --fix",
+    "lint:css": "stylelint css/*.css --ignore-pattern '*.min.css' --fix",
+    "test": "jest",
+    "validate:html": "html-validate templates/*.php pages/*.php *.php",
+    "validate:php": "./validate-php.sh",
+    "validate": "npm run lint:js && npm run lint:css && npm run validate:php",
+    "test:all": "npm run validate && npm run test && phpunit"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "html-validate": "^8.9.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.0.2",
+    "jquery": "^3.7.1",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard": "^36.0.0"
+  }
+}

@@ -12,7 +12,7 @@ The theme is clean, content-focused, and designed for clarity. It offers simple,
 * :zap: **Fast page transitions with AJAX.** Front-end AJAX-powered page loading for smooth navigation.
 * :lock: **HTTPS ready.** Compatible with SSL certificates for secure connections.
 * :lock_with_ink_pen: **Content Security Policy settings.** Easily add and manage policies to protect your web site (UX improvements in progress).
-* :+1: **Standards compliant code.** HTML5, CSS3, and JavaScript following web standards.
+* :+1: **Standards compliant & validated code.** HTML5, CSS3, and JavaScript code analysis and verification with automated testing.
 * :iphone: **Responsive design.** Support for desktops, laptops, tablets, and smartphone screens.
 * :bar_chart: **Matomo Analytics integration.** No code necessary. Works with any host.
 * :mag: **SEO features included.** Custom meta descriptions, keywords, and page titles for search optimization.
@@ -65,6 +65,41 @@ Create your About page.
 4. Confirm your permalinks look similar to: yourdomain.com/about/
 5. If you experience any issues or have enhancement suggestions, you can report them in the [issue tracker](https://github.com/aidanamavi/portfolio-theme/issues).
 
+
+## Development & Validation
+
+The theme includes comprehensive code validation and testing tools to ensure quality and standards compliance:
+
+### Code Validation
+* **JavaScript**: ESLint for code quality and standards compliance
+* **CSS**: Stylelint for stylesheet validation and best practices
+* **PHP**: Built-in syntax validation for all PHP files
+
+### Testing
+* **Unit Tests**: PHPUnit for PHP functionality testing
+* **JavaScript Tests**: Jest for frontend component testing
+* **Integration Tests**: Comprehensive theme functionality validation
+
+### Available Commands
+```bash
+# Install development dependencies
+npm install
+
+# Run all validations
+npm run validate
+
+# Run all tests
+npm run test:all
+
+# Individual validations
+npm run lint:js        # JavaScript linting
+npm run lint:css       # CSS linting
+npm run validate:php   # PHP syntax validation
+
+# Individual tests
+npm test              # JavaScript tests
+phpunit              # PHP tests
+```
 
 ## Known Issues
 1. UX for Content-Security-Policy needs improvement.

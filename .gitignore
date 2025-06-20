@@ -1,3 +1,23 @@
 .DS_Store
 wp-config.*
 .notes.md
+
+# Development dependencies
+/node_modules/
+/vendor/
+
+# Test coverage reports
+/coverage/
+
+# Log files
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build artifacts
+*.tgz
+*.tar.gz
