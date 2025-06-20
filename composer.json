@@ -1,0 +1,34 @@
+{
+    "name": "aidanamavi/portfolio-theme",
+    "description": "A minimalist WordPress theme for portfolios with unit testing support",
+    "type": "wordpress-theme",
+    "license": "AGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Aidan Amavi",
+            "email": "mail@aidanamavi.com",
+            "homepage": "https://www.aidanamavi.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "yoast/phpunit-polyfills": "^1.0",
+        "brain/monkey": "^2.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PortfolioTheme\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-html coverage/"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
