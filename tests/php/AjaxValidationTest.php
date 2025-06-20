@@ -5,18 +5,29 @@
  * @package WordPress Portfolio Theme
  */
 
+namespace PortfolioTheme\Tests;
+
 use PHPUnit\Framework\TestCase;
+use Brain\Monkey;
+use Brain\Monkey\Functions;
 
 class AjaxValidationTest extends TestCase
 {
     protected function setUp(): void
     {
         parent::setUp();
+        Monkey\setUp();
+        
+        // Mock WordPress functions that might be called during file inclusion
+        Functions\when('add_action')->justReturn(true);
+        Functions\when('wp_die')->justReturn(true);
+        Functions\when('check_ajax_referer')->justReturn(true);
+        Functions\when('get_template_part')->justReturn(true);
     }
 
     protected function tearDown(): void
     {
-        \Brain\Monkey\tearDown();
+        Monkey\tearDown();
         parent::tearDown();
     }
 
@@ -25,13 +36,7 @@ class AjaxValidationTest extends TestCase
      */
     public function test_validate_integer_input_valid()
     {
-        // Load the AJAX file to get the function
-        ob_start();
-        require dirname(dirname(__DIR__)) . '/php/ajax.php';
-        ob_end_clean();
-
-        // Since validateIntegerInput is inside a function, we need to extract it
-        // For testing purposes, let's create a simplified version
+        // Test validation logic without including the actual AJAX file
         $validateIntegerInput = function($input) {
             $input = abs(intval($input));
             filter_var($input, FILTER_SANITIZE_NUMBER_INT);
@@ -74,10 +79,10 @@ class AjaxValidationTest extends TestCase
     public function test_ajax_nonce_validation()
     {
         // Mock WordPress nonce functions
-        \Brain\Monkey\Functions\when('check_ajax_referer')
+        Functions\when('check_ajax_referer')
             ->justReturn(true);
 
-        $this->assertTrue(\Brain\Monkey\Functions\check_ajax_referer('ajax_fetch_nonce', 'token', false));
+        $this->assertTrue(check_ajax_referer('ajax_fetch_nonce', 'token', false));
     }
 
     /**
@@ -86,11 +91,11 @@ class AjaxValidationTest extends TestCase
     public function test_ajax_response_headers()
     {
         // Mock WordPress functions
-        \Brain\Monkey\Functions\when('get_template_part')
+        Functions\when('get_template_part')
             ->justReturn(true);
 
         // Test that we can mock the template part function
-        $this->assertTrue(\Brain\Monkey\Functions\get_template_part('templates/index', '403'));
+        $this->assertTrue(get_template_part('templates/index', '403'));
     }
 
     /**

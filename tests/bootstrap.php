@@ -10,7 +10,7 @@ if (file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
     require_once dirname(__DIR__) . '/vendor/autoload.php';
 }
 
-// Load Brain Monkey for WordPress function mocking
+// Load Brain Monkey for WordPress function mocking FIRST
 if (class_exists('Brain\Monkey\Setup')) {
     \Brain\Monkey\setUp();
 }
@@ -24,45 +24,17 @@ if (!defined('WP_DEBUG')) {
     define('WP_DEBUG', true);
 }
 
-// Mock WordPress functions that are commonly used
-if (!function_exists('esc_url')) {
-    function esc_url($url) {
-        return $url;
-    }
-}
+// Mock essential WordPress functions that might be called during file inclusion
+\Brain\Monkey\Functions\when('add_action')->justReturn(true);
+\Brain\Monkey\Functions\when('wp_die')->justReturn(true);
+\Brain\Monkey\Functions\when('check_ajax_referer')->justReturn(true);
+\Brain\Monkey\Functions\when('get_template_part')->justReturn(true);
+\Brain\Monkey\Functions\when('esc_url')->returnArg();
+\Brain\Monkey\Functions\when('esc_attr')->returnArg();
+\Brain\Monkey\Functions\when('get_category_link')->alias(function($id) {
+    return "http://example.com/category/{$id}";
+});
+\Brain\Monkey\Functions\when('get_post_type')->justReturn('post');
+\Brain\Monkey\Functions\when('get_the_category')->justReturn([]);
 
-if (!function_exists('esc_attr')) {
-    function esc_attr($text) {
-        return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
-    }
-}
-
-if (!function_exists('get_category_link')) {
-    function get_category_link($category_id) {
-        return 'http://example.com/category/' . $category_id;
-    }
-}
-
-if (!function_exists('get_post_type')) {
-    function get_post_type($post_id = null) {
-        return 'post';
-    }
-}
-
-if (!function_exists('get_the_category')) {
-    function get_the_category($post_id = null) {
-        return [
-            (object) [
-                'term_id' => 1,
-                'name' => 'Test Category',
-                'cat_name' => 'Test Category'
-            ]
-        ];
-    }
-}
-
-if (!function_exists('__')) {
-    function __($text, $domain = null) {
-        return $text;
-    }
-}
+// Don't auto-load theme files in bootstrap - let individual tests load what they need

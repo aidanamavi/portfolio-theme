@@ -5,6 +5,8 @@
  * @package WordPress Portfolio Theme
  */
 
+namespace PortfolioTheme\Tests;
+
 use PHPUnit\Framework\TestCase;
 
 class CustomRemoveUrlProtocolTest extends TestCase

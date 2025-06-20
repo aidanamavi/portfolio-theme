@@ -5,20 +5,37 @@
  * @package WordPress Portfolio Theme
  */
 
+namespace PortfolioTheme\Tests;
+
 use PHPUnit\Framework\TestCase;
+use Brain\Monkey;
+use Brain\Monkey\Functions;
 
 class CustomTheCategoryTest extends TestCase
 {
     protected function setUp(): void
     {
         parent::setUp();
-        // Load the function under test
-        require_once dirname(dirname(__DIR__)) . '/php/custom_the_category.php';
+        Monkey\setUp();
+        
+        // Mock WordPress functions before including the file
+        Functions\when('get_the_category')->justReturn([]);
+        Functions\when('esc_url')->returnArg();
+        Functions\when('esc_attr')->returnArg();
+        Functions\when('get_category_link')->alias(function($id) {
+            return "http://example.com/category/{$id}";
+        });
+        Functions\when('get_post_type')->justReturn('post');
+        
+        // Now load the function under test
+        if (!function_exists('custom_the_category')) {
+            require_once dirname(dirname(__DIR__)) . '/php/custom_the_category.php';
+        }
     }
 
     protected function tearDown(): void
     {
-        \Brain\Monkey\tearDown();
+        Monkey\tearDown();
         parent::tearDown();
     }
 
@@ -27,21 +44,14 @@ class CustomTheCategoryTest extends TestCase
      */
     public function test_custom_the_category_single_category()
     {
-        // Mock WordPress functions
-        \Brain\Monkey\Functions\when('get_the_category')->justReturn([
+        // Override the mock for this specific test
+        Functions\when('get_the_category')->justReturn([
             (object) [
                 'term_id' => 1,
                 'name' => 'Test Category',
                 'cat_name' => 'Test Category'
             ]
         ]);
-
-        \Brain\Monkey\Functions\when('esc_url')->returnArg();
-        \Brain\Monkey\Functions\when('esc_attr')->returnArg();
-        \Brain\Monkey\Functions\when('get_category_link')->alias(function($id) {
-            return "http://example.com/category/{$id}";
-        });
-        \Brain\Monkey\Functions\when('get_post_type')->justReturn('post');
 
         // Capture output
         ob_start();
@@ -62,8 +72,8 @@ class CustomTheCategoryTest extends TestCase
      */
     public function test_custom_the_category_multiple_categories()
     {
-        // Mock WordPress functions with multiple categories
-        \Brain\Monkey\Functions\when('get_the_category')->justReturn([
+        // Override the mock for multiple categories
+        Functions\when('get_the_category')->justReturn([
             (object) [
                 'term_id' => 1,
                 'name' => 'First Category',
@@ -76,12 +86,7 @@ class CustomTheCategoryTest extends TestCase
             ]
         ]);
 
-        \Brain\Monkey\Functions\when('esc_url')->returnArg();
-        \Brain\Monkey\Functions\when('esc_attr')->returnArg();
-        \Brain\Monkey\Functions\when('get_category_link')->alias(function($id) {
-            return "http://example.com/category/{$id}";
-        });
-        \Brain\Monkey\Functions\when('get_post_type')->justReturn('work');
+        Functions\when('get_post_type')->justReturn('work');
 
         // Capture output
         ob_start();
@@ -101,7 +106,7 @@ class CustomTheCategoryTest extends TestCase
     public function test_custom_the_category_no_categories()
     {
         // Mock WordPress functions with empty categories
-        \Brain\Monkey\Functions\when('get_the_category')->justReturn([]);
+        Functions\when('get_the_category')->justReturn([]);
 
         // Capture output
         ob_start();

@@ -20,7 +20,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "PortfolioTheme\\Tests\\": "tests/"
+            "PortfolioTheme\\Tests\\": "tests/php/"
         }
     },
     "scripts": {
