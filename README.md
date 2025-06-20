@@ -11,7 +11,7 @@ The theme is clean, content-focused, and designed for clarity. It offers simple,
 * :rocket: **Built with modern open-source technologies.** Built for WordPress, PHP, and jQuery with Matomo analytics integration.
 * :zap: **Fast page transitions with AJAX.** Front-end AJAX-powered page loading for smooth navigation.
 * :lock: **HTTPS ready.** Compatible with SSL certificates for secure connections.
-* :lock_with_ink_pen: **Content Security Policy settings.** Easily add and manage policies to protect your web site.
+* :lock_with_ink_pen: **Content Security Policy settings.** Easily add and manage policies to protect your web site (UX improvements in progress).
 * :+1: **Standards compliant code.** HTML5, CSS3, and JavaScript following web standards.
 * :iphone: **Responsive design.** Support for desktops, laptops, tablets, and smartphone screens.
 * :bar_chart: **Matomo Analytics integration.** No code necessary. Works with any host.
@@ -62,8 +62,8 @@ Create your About page.
 1. Use images with 16:9 aspect ratio.
 2. Upload your media directly to WordPress.
 3. Perform search engine optimizations for every media, post and page.
-5. Confirm your permalinks look similar to: yourdomain.com/about/
-6. If you experience any issues or have enhancement suggestions, you can report them in the [issue tracker](https://github.com/aidanamavi/portfolio-theme/issues). 
+4. Confirm your permalinks look similar to: yourdomain.com/about/
+5. If you experience any issues or have enhancement suggestions, you can report them in the [issue tracker](https://github.com/aidanamavi/portfolio-theme/issues).
 
 
 ## Known Issues
