@@ -28,7 +28,7 @@ jQuery(document).ready( function() {
       multiple: false
     });
     custom_uploader.on('select', function() {
-      let attachment = custom_uploader.state().get('selection').first().toJSON
+      let attachment = custom_uploader.state().get('selection').first().toJSON;
       jQuery('#'+input).val(attachment.url);
 			let slideId = input.substr(0, 7);
 			let elementId = slideId + '_title';

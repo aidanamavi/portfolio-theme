@@ -65,14 +65,14 @@ jQuery(document).ready( function() {
       var dfd = $.Deferred();
       dfds.push(dfd);
       var img = new Image();
-      img.onload = function(){dfd.resolve();}
-      img.onerror = function(){dfd.resolve();}
+      img.onload = function(){dfd.resolve();};
+      img.onerror = function(){dfd.resolve();};
       img.src = this.src;
     });
     // Return a master promise object, which resolves when all deferred objects have resolved
     // resolved by loading or by error
     return $.when.apply($,dfds);
-	}
+	};
 	String.prototype.capitalize = function() {
 	  return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
 	};
