@@ -15,39 +15,39 @@
 $content_security_settings = array(
   array(
     'name' => 'default_src_textbox',
-    'label' => 'Default Source',
+    'label' => 'Default Source (default-src)',
     'key' => 'default-src',
-    'description' => __( 'The web site address that this web site uses.', 'portfoliotheme' ),
+    'description' => __( 'Default source for all content types not covered by other policies. Use \'self\' for your own domain, or add trusted domains like \'https://example.com\'. Separate multiple sources with spaces.', 'portfoliotheme' ),
   ),
   array(
     'name' => 'frame_src_textbox',
-    'label' => 'Frame Source',
+    'label' => 'Frame Source (frame-src)',
     'key' => 'frame-src',
-    'description' => __( 'Trusted web site addresses you use for iframe elements.', 'portfoliotheme' ),
+    'description' => __( 'Controls where iframe content can be loaded from. Use \'self\' for your own domain, or add trusted sites like \'https://youtube.com https://vimeo.com\' for embedded videos. Use \'none\' to block all iframes.', 'portfoliotheme' ),
   ),
   array(
     'name' => 'font_src_textbox',
-    'label' => 'Font Source',
+    'label' => 'Font Source (font-src)',
     'key' => 'font-src',
-    'description' => __('Trusted web site addresses you use for fonts loaded using @font-face.', 'portfoliotheme' ),
+    'description' => __('Controls where web fonts can be loaded from. Use \'self\' for local fonts, or add services like \'https://fonts.googleapis.com https://fonts.gstatic.com\' for Google Fonts. Include \'data:\' if using data URI fonts.', 'portfoliotheme' ),
   ),
   array(
     'name' => 'img_src_textbox',
-    'label' => 'Image Source',
-    'key' => 'image-src',
-    'description' => __('Trusted web site addresses you use for images and favicons.', 'portfoliotheme' ),
+    'label' => 'Image Source (img-src)',
+    'key' => 'img-src',
+    'description' => __('Controls where images and favicons can be loaded from. Use \'self\' for your own images, add \'data:\' for inline images, or include CDNs like \'https://cdn.example.com\'. Separate multiple sources with spaces.', 'portfoliotheme' ),
   ),
   array(
     'name' => 'media_src_textbox',
-    'label' => 'Media Source',
+    'label' => 'Media Source (media-src)',
     'key' => 'media-src',
-    'description' => __('Trusted web site addresses you use for audio, video, and track elements.', 'portfoliotheme' ),
+    'description' => __('Controls where audio and video content can be loaded from. Use \'self\' for your own media files, or add trusted sources like \'https://media.example.com\'. Include \'data:\' if using data URI media.', 'portfoliotheme' ),
   ),
   array(
     'name' => 'object_src_textbox',
-    'label' => 'Object Source',
+    'label' => 'Object Source (object-src)',
     'key' => 'object-src',
-    'description' => __('Trusted web site addresses you use for object, embed, and applet elements.', 'portfoliotheme' ),
+    'description' => __('Controls where object, embed, and applet elements can be loaded from. Use \'none\' to block all plugins (recommended for security), or add trusted sources if you need Flash or other plugins.', 'portfoliotheme' ),
   ),
   // array(
   //   'name' => 'unsafe_eval_select',
@@ -69,10 +69,10 @@ function customize_content_security( $wp_customize ) {
   $wp_customize->add_section(
       $section['name'],
       array(
-        'title' => 'Content Security Settings',
+        'title' => 'Security & Content Policy',
         'priority' => 35,
         'panel' => 'theme_panel',
-        'description' => __( 'Improve your web site security with content policies.', 'portfoliotheme' ),
+        'description' => __( 'Content Security Policy helps protect your website from malicious attacks by controlling which external resources can be loaded. Only enter trusted domains that your site actually uses. Leave fields empty if you don\'t use that type of resource.', 'portfoliotheme' ),
       )
   );
   foreach ($settings as $setting) {
