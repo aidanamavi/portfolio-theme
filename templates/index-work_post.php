@@ -3,10 +3,10 @@
 * The template for displaying individual portfolio content.
 *
 * @package WordPress Portfolio Theme
-* @version 0.5
+* @version 0.4
 * @author Aidan Amavi <mail@aidanamavi.com>
 * @link https://www.aidanamavi.com Author's Web Site
-* @copyright 2012 - 2024, Aidan Amavi
+* @copyright 2012 - 2021, Aidan Amavi
 * @license https://www.gnu.org/licenses/agpl.html GNU Affero General Public License
 */
 ?>
@@ -20,8 +20,8 @@
 						<div class="numbers">
 <?php 			while ($numberCount <= $slideTotal) : ?>
 							<div data-slide="<?php echo $numberCount; ?>">
-								<img src="<?php bloginfo('template_url'); ?>/img/highlight_number_<?php echo $numberCount; ?>@2x.png" class="off" alt="">
-								<img src="<?php bloginfo('template_url'); ?>/img/highlight_number_<?php echo $numberCount; ?>_on@2x.png" class="on" alt="">
+								<img src="<?php echo get_template_directory_uri(); ?>/img/highlight_number_<?php echo $numberCount; ?>@2x.png" class="off" alt="">
+								<img src="<?php echo get_template_directory_uri(); ?>/img/highlight_number_<?php echo $numberCount; ?>_on@2x.png" class="on" alt="">
 							</div>
 <?php 				++$numberCount;
 						endwhile; ?>
@@ -32,9 +32,10 @@
 <?php 		while ($slideCount <= $slideTotal) :
 							$slideId = 'slide_'.$slideCount; ?>
 						<div class="slide<?php if ($slideCount > 1) : echo ' hide toggleFade'; endif; ?>" data-slide="<?php echo $slideCount; ?>">
-<?php					$slideImageUrl = remove_url_protocol(esc_url(get_post_meta( get_the_ID(), 'slide_'.$slideCount.'_url', true )));
+<?php				## Get the image path from the URL: https://developer.wordpress.org/reference/functions/wp_parse_url/
+						$slideImageUrl = wp_parse_url(esc_url(get_post_meta( get_the_ID(), 'slide_'.$slideCount.'_url', true )));
 							$slideImageTitle = esc_attr(get_post_meta( get_the_ID(), 'slide_'.$slideCount.'_title', true )); ?>
-							<img src="<?php echo $slideImageUrl; ?>" class="highlight" alt="<?php echo $slideImageTitle; ?>">
+							<img src="<?php echo $slideImageUrl['path']; ?>" class="highlight" alt="<?php echo $slideImageTitle; ?>">
 							<div class="highlight_text">
 								<div class="title_wrapper">
 									<div class="title">
