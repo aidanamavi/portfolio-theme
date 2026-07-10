@@ -52,26 +52,141 @@ jQuery(document).ready( function() {
 			// console.log(state);
 		}
 	}
-	//  Enables an event to fire after all images are loaded
+	// Status notification system for automated UX feedback
+	function showStatusNotification(message, isError) {
+		// Create or update status notification
+		if (!jQuery('#loading_status').length) {
+			jQuery('body').append('<div id="loading_status" style="position:fixed;top:20px;right:20px;background:rgba(0,0,0,0.8);color:white;padding:10px 15px;border-radius:5px;font-size:12px;z-index:9999;max-width:300px;"></div>');
+		}
+		var statusEl = jQuery('#loading_status');
+		statusEl.html(message);
+		statusEl.css('background', isError ? 'rgba(204,0,0,0.8)' : 'rgba(0,0,0,0.8)');
+		statusEl.stop().show().animate({'opacity': '1'}, 300);
+	}
+	
+	function hideStatusNotification() {
+		jQuery('#loading_status').stop().animate({'opacity': '0'}, 300, function(){
+			jQuery(this).hide();
+		});
+	}
+
+	//  Enables an event to fire after all images are loaded with automated retry
 	jQuery.prototype.imagesLoaded = function() {
 		// console.log('------ IMAGES LOADING ------');
     // Get all the images (excluding those with no src attribute)
     var $imgs = this.find('img[src!=""]');
     // If there are no images, just return an already resolved promise
     if (!$imgs.length) {return $.Deferred().resolve().promise();}
+    
+    var totalImages = $imgs.length;
+    var loadedImages = 0;
+    var failedImages = [];
+    
+    // Show initial status
+    if (totalImages > 3) { // Only show for substantial image loads
+    	showStatusNotification('Loading ' + totalImages + ' images...');
+    }
+    
     // For each image, add a deferred object to the array, which resolves when the image is loaded (or if loading fails)
     var dfds = [];
     $imgs.each(function(){
       var dfd = $.Deferred();
       dfds.push(dfd);
-      var img = new Image();
-      img.onload = function(){dfd.resolve();}
-      img.onerror = function(){dfd.resolve();}
-      img.src = this.src;
+      var imgElement = this;
+      var retryCount = 0;
+      var maxRetries = 2; // Automated retry limit
+      
+      function attemptImageLoad() {
+        var img = new Image();
+        img.onload = function(){
+        	loadedImages++;
+        	if (totalImages > 3) {
+        		showStatusNotification('Loaded ' + loadedImages + '/' + totalImages + ' images...');
+        	}
+        	dfd.resolve();
+        };
+        img.onerror = function(){
+        	// Automated retry with exponential backoff
+        	if (retryCount < maxRetries) {
+        		retryCount++;
+        		var delay = Math.pow(2, retryCount) * 1000; // 2s, 4s delays
+        		if (totalImages > 3) {
+        			showStatusNotification('Retrying image ' + retryCount + '/' + maxRetries + '...', false);
+        		}
+        		setTimeout(attemptImageLoad, delay);
+        	} else {
+        		// Failed after retries - add placeholder and resolve
+        		failedImages.push(imgElement.src);
+        		loadedImages++; // Count as "processed"
+        		addImagePlaceholder(imgElement);
+        		if (totalImages > 3) {
+        			showStatusNotification('Loaded ' + loadedImages + '/' + totalImages + ' images (some failed)...', true);
+        		}
+        		dfd.resolve();
+        	}
+        };
+        // Set a timeout for each image attempt to prevent hanging
+        setTimeout(function() {
+          if (dfd.state() === 'pending' && retryCount === 0) {
+            // console.log('Image loading timeout for:', img.src);
+            // Trigger retry mechanism on timeout
+            img.onerror();
+          }
+        }, 8000); // 8 second timeout per image
+        img.src = imgElement.src;
+      }
+      
+      attemptImageLoad();
     });
+    
     // Return a master promise object, which resolves when all deferred objects have resolved
-    // resolved by loading or by error
-    return $.when.apply($,dfds);
+    var masterPromise = $.when.apply($,dfds);
+    masterPromise.then(function() {
+    	// Hide status notification after a delay
+    	setTimeout(function() {
+    		if (failedImages.length > 0 && totalImages > 3) {
+    			showStatusNotification(failedImages.length + ' images failed to load', true);
+    			setTimeout(hideStatusNotification, 3000);
+    		} else {
+    			hideStatusNotification();
+    		}
+    	}, 1000);
+    });
+    
+    return masterPromise;
+	}
+	
+	// Add placeholder for failed images with automated background retry
+	function addImagePlaceholder(imgElement) {
+		var $img = jQuery(imgElement);
+		var originalSrc = $img.attr('src');
+		
+		// Create placeholder wrapper
+		var placeholder = jQuery('<div class="image-placeholder" style="background:#f0f0f0;border:1px dashed #ccc;display:flex;align-items:center;justify-content:center;color:#666;font-size:12px;min-height:100px;width:' + ($img.width() || 200) + 'px;height:' + ($img.height() || 100) + 'px;">Image failed to load<br><small>Retrying in background...</small></div>');
+		
+		// Replace image with placeholder
+		$img.after(placeholder).hide();
+		
+		// Continue trying to load in background every 30 seconds
+		var backgroundRetryTimer = setInterval(function() {
+			var bgImg = new Image();
+			bgImg.onload = function() {
+				// Success! Replace placeholder with actual image
+				$img.attr('src', originalSrc).show();
+				placeholder.remove();
+				clearInterval(backgroundRetryTimer);
+			};
+			bgImg.onerror = function() {
+				// Still failing, continue trying
+			};
+			bgImg.src = originalSrc + '?' + Date.now(); // Cache busting
+		}, 30000);
+		
+		// Stop trying after 5 minutes
+		setTimeout(function() {
+			clearInterval(backgroundRetryTimer);
+			placeholder.html('Image unavailable');
+		}, 300000);
 	}
 	String.prototype.capitalize = function() {
 	  return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
@@ -95,6 +210,11 @@ jQuery(document).ready( function() {
 	}
 	function hideLoadingAnimation() {
 		// console.log('hideLoadingAnimation()');
+		// Ensure we don't hide an already hidden animation to prevent issues
+		if (!isPageLoading && jQuery('#loading_animation').css('opacity') == '0') {
+			// console.log('Loading animation already hidden, skipping...');
+			return;
+		}
 		jQuery('#loading_animation').stop().animate({'opacity': '0'},500, function(){
 			isPageLoading = false;
 			updateVisiblePage();
@@ -208,11 +328,29 @@ jQuery(document).ready( function() {
 			jQuery('#'+visiblePage).hide( function() {
 				if (pageContent) {
 					jQuery('#content_wrapper').css('opacity', '0');
-					jQuery('#content_wrapper').append(pageContent).imagesLoaded().then(function(){
-						// console.log('------ IMAGES LOADED ------');
+					// Set up a fallback timeout for dynamic content loading
+					var displayPageTimeoutId = setTimeout(function() {
+						// console.log('Display page timeout triggered - forcing loading animation to hide');
+						showStatusNotification('Page loading timeout - continuing with available content', true);
+						setTimeout(hideStatusNotification, 3000);
 						jQuery('#content_wrapper').animate({'opacity':'1'},1000);
 						hideLoadingAnimation();
-        	});
+					}, 8000); // 8 second fallback timeout for dynamic content
+					
+					jQuery('#content_wrapper').append(pageContent).imagesLoaded().then(function(){
+						// console.log('------ IMAGES LOADED ------');
+						clearTimeout(displayPageTimeoutId);
+						jQuery('#content_wrapper').animate({'opacity':'1'},1000);
+						hideLoadingAnimation();
+        	}).catch(function(error) {
+						// Handle any errors in the image loading process for dynamic content
+						// console.log('Error during dynamic content image loading:', error);
+						clearTimeout(displayPageTimeoutId);
+						showStatusNotification('Some page content failed to load - continuing anyway', true);
+						setTimeout(hideStatusNotification, 3000);
+						jQuery('#content_wrapper').animate({'opacity':'1'},1000);
+						hideLoadingAnimation();
+					});
 					addHighlightSlideCursor();
 				} else {
 					// scenario: restart browser with forward history, no div/content
@@ -315,11 +453,28 @@ jQuery(document).ready( function() {
 
 	// First page load.
 	window.onload = function() {
+		// Set up a fallback timeout to ensure loading animation is always hidden
+		var loadingTimeoutId = setTimeout(function() {
+			// console.log('Loading timeout triggered - forcing loading animation to hide');
+			showStatusNotification('Loading timeout - continuing with available content', true);
+			setTimeout(hideStatusNotification, 3000);
+			hideLoadingAnimation();
+		}, 10000); // 10 second fallback timeout
+
 		jQuery('html').animate({'opacity':'1'},1, function(){
 			jQuery('#content_wrapper').imagesLoaded().then(function(){
 				// After images are loaded
 				// console.log('------ IMAGES LOADED ------');
 				// TODO: add a show event and add a display none to content wrapper; fixes ovefflow issues when loading animation...
+				clearTimeout(loadingTimeoutId); // Clear the fallback timeout since images loaded successfully
+				jQuery('#content_wrapper').animate({'opacity':'1'},750);
+				hideLoadingAnimation();
+			}).catch(function(error) {
+				// Handle any errors in the image loading process
+				// console.log('Error during image loading:', error);
+				clearTimeout(loadingTimeoutId);
+				showStatusNotification('Some content failed to load - continuing anyway', true);
+				setTimeout(hideStatusNotification, 3000);
 				jQuery('#content_wrapper').animate({'opacity':'1'},750);
 				hideLoadingAnimation();
 			});
